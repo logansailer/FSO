@@ -1,6 +1,12 @@
 import { useState } from "react";
 
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
+
 const App = () => {
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   const anecdotes = [
     "If it hurts, do it more often.",
     "Adding manpower to a late software project makes it later!",
@@ -12,9 +18,44 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
 
-  const [selected, setSelected] = useState(0);
+  const points = [0, 0, 0, 0, 0, 0, 0, 0];
 
-  return <div>{anecdotes[selected]}</div>;
+  const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(points);
+
+  const handleNext = () => {
+    let number = getRandomInt(8);
+    setSelected(number);
+  };
+
+  const handleVote = () => {
+    const copyVotes = [...votes];
+    copyVotes[selected] += 1;
+    setVotes(copyVotes);
+  };
+
+  const FindHighest = () => {
+    let highestVotes = Math.max(...votes);
+    let highest = votes.indexOf(highestVotes)
+    return (
+      <div>
+        <p>{anecdotes[highest]}</p>
+        <p>has {highestVotes} votes</p>
+      </div>
+    )
+  };
+
+  return (
+    <div>
+      <h2>Anecdote of the day</h2>
+      <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <Button onClick={handleVote} text="vote" />
+      <Button onClick={handleNext} text="next anecdote" />
+      <h2>Anecdote with most votes</h2>
+      <FindHighest />
+    </div>
+  );
 };
 
 export default App;
