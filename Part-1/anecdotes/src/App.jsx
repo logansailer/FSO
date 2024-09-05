@@ -27,7 +27,7 @@ const App = () => {
     let number = getRandomInt(8);
     setSelected(number);
   };
-
+  
   const handleVote = () => {
     const copyVotes = [...votes];
     copyVotes[selected] += 1;
