@@ -1,44 +1,4 @@
-const Heading = ({ course }) => {
-  return <h2>{course.name}</h2>;
-};
-
-const Part = ({ course }) => {
-  return (
-    <div>
-      {course.parts.map((part) => {
-        return (
-          <p key={part.id}>
-            {part.name} {part.exercises}
-          </p>
-        );
-      })}
-    </div>
-  );
-};
-
-const Total = ({ course }) => {
-  const initial = 0;
-  const totalCourses = course.parts.reduce(
-    (exerciseSum, amount) => exerciseSum + amount.exercises,
-    initial
-  );
-
-  return <p>total of {totalCourses} exercises</p>;
-};
-
-const Course = ({ courses }) => {
-  return (
-    <div>
-      {courses.map((course) => (
-        <div key={course.id}>
-          <Heading course={course} />
-          <Part course={course} />
-          <Total course={course} />
-        </div>
-      ))}
-    </div>
-  );
-};
+import Course from "./componenets/Course";
 
 const App = () => {
   const courses = [
