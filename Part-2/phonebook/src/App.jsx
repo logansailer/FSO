@@ -55,7 +55,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Search value={newSearch} onChange={handleSearch} />
-      <h2>add a new</h2>
+      <h3>add a new</h3>
       <Form
         addName={addName}
         newName={newName}
@@ -63,7 +63,7 @@ const App = () => {
         newNumber={newNumber}
         handleNumberChange={handleNumberChange}
       />
-      <h2>Numbers</h2>
+      <h3>Numbers</h3>
       {persons.map((person) => (
         <Person key={person.id} person={person} />
       ))}
