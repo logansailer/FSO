@@ -7,16 +7,16 @@ const App = () => {
   const [newNote, setNewNote] = useState("a new note...");
   const [showAll, setShowAll] = useState(true);
 
-  useEffect(() => {
+  const hook = () => {
     console.log('effect')
     axios
     .get("http://localhost:3001/notes")
     .then(response => {
-      console.log('promise fulfilled')
       setNotes(response.data)
     })
-  }, [])
-  console.log('render', notes.length, 'motes')
+  }
+
+useEffect(hook, [])
 
   const handleNoteChange = (event) => {
     console.log(event.target.value);
