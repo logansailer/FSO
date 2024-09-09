@@ -3,7 +3,8 @@
     {
       "id": "1",
       "content": "HTML is easy",
-      "important": true
+      "important": false,
+      "importance": false
     },
     {
       "id": "2",
@@ -13,7 +14,73 @@
     {
       "id": "3",
       "content": "GET and POST are the most important methods of HTTP protocol",
-      "important": true
+      "important": false,
+      "importance": false
+    },
+    {
+      "id": "e5f4",
+      "content": "a new note...poop",
+      "important": false,
+      "importance": true
+    },
+    {
+      "id": "dacb",
+      "content": "pee",
+      "important": false,
+      "importance": true
+    },
+    {
+      "id": "599e",
+      "content": "pee",
+      "important": false
+    },
+    {
+      "id": "79bc",
+      "content": "shid",
+      "important": false,
+      "importance": true
+    },
+    {
+      "id": "1c27",
+      "content": "shid",
+      "important": false,
+      "importance": true
+    },
+    {
+      "id": "74b0",
+      "content": "a new note...hi",
+      "important": false,
+      "importance": false
+    },
+    {
+      "id": "a942",
+      "content": "hi",
+      "important": false,
+      "importance": false
+    },
+    {
+      "id": "2f14",
+      "content": "ji",
+      "important": false,
+      "importance": false
+    },
+    {
+      "id": "ff43",
+      "content": "ji",
+      "important": false,
+      "importance": true
+    },
+    {
+      "id": "9f3d",
+      "content": "hi",
+      "important": false,
+      "importance": false
+    },
+    {
+      "id": "6efb",
+      "content": "heyyy",
+      "important": true,
+      "importance": true
     }
   ]
 }
