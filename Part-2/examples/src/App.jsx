@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Note from "./components/note";
 import noteService from "./services/notes";
 
@@ -7,12 +6,6 @@ const App = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("a new note...");
   const [showAll, setShowAll] = useState(true);
-
-  const hook = () => {
-    axios.get("http://localhost:3001/notes").then((response) => {
-      setNotes(response.data);
-    });
-  };
 
   const notesToShow = showAll
     ? notes

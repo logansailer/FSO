@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import phonebookService from "./services/phonebook";
 import Person from "./components/person";
 import Search from "./components/Search";
 import Form from "./components/Form";
@@ -11,10 +11,10 @@ const App = () => {
   const [newSearch, setNewSearch] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
+    phonebookService.getAll().then((initialPhonebook) => {
+      setPersons(initialPhonebook);
     });
-  });
+  }, []);
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
@@ -34,14 +34,16 @@ const App = () => {
     const personObject = {
       name: newName,
       number: newNumber,
-      id: String(newName),
     };
     if (checkDuplicate(newName) == true) {
       alert(`${newName} is already added to phonebook`);
       setNewName("");
     } else {
-      setPersons(persons.concat(personObject));
-      setNewName("");
+      phonebookService.create(personObject).then((returnedPersons) => {
+        setPersons(persons.concat(returnedPersons));
+        setNewName("");
+        setNewNumber("");
+      });
     }
   };
 
@@ -51,6 +53,15 @@ const App = () => {
     const searchedPerson = () =>
       persons.filter((person) => person.name.match(regex));
     setPersons(searchedPerson);
+  };
+
+  const deletePerson = (id) => {
+    const personObject = persons.find((n) => n.id === id);
+    if (window.confirm(`Delete ${personObject.name}?`)) {
+      phonebookService.deletePerson(personObject.id);
+
+      setPersons(persons.filter((person) => person.id !== personObject.id));
+    }
   };
 
   return (
@@ -67,7 +78,11 @@ const App = () => {
       />
       <h3>Numbers</h3>
       {persons.map((person) => (
-        <Person key={person.id} person={person} />
+        <Person
+          key={person.id}
+          person={person}
+          deletePerson={() => deletePerson(person.id)}
+        />
       ))}
     </div>
   );
