@@ -3,12 +3,14 @@ import phonebookService from "./services/phonebook";
 import Person from "./components/person";
 import Search from "./components/Search";
 import Form from "./components/Form";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newSearch, setNewSearch] = useState("");
+  const [topMessage, setTopMessage] = useState(null);
 
   useEffect(() => {
     phonebookService.getAll().then((initialPhonebook) => {
@@ -45,6 +47,10 @@ const App = () => {
         setNewNumber("");
       });
     }
+    setTopMessage(`'${personObject.name}' was added to the phonebook`);
+    setTimeout(() => {
+      setTopMessage(null);
+    }, 3000);
   };
 
   const handleSearch = (event) => {
@@ -59,14 +65,18 @@ const App = () => {
     const personObject = persons.find((n) => n.id === id);
     if (window.confirm(`Delete ${personObject.name}?`)) {
       phonebookService.deletePerson(personObject.id);
-
       setPersons(persons.filter((person) => person.id !== personObject.id));
+      setTopMessage(`'${personObject.name}' was removed from the phonebook`);
+      setTimeout(() => {
+        setTopMessage(null);
+      }, 3000);
     }
   };
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={topMessage} />
       <Search value={newSearch} onChange={handleSearch} />
       <h3>add a new</h3>
       <Form
